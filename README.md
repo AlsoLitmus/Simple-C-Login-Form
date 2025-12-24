@@ -4,7 +4,7 @@
 
 The project allows users to register an acccount or login. User's are prompted with two choices, Register and Login in. The user has to choose the appropriate key (1 or 2), to perform the action they want to perform. If a user wants to register an account, they must enter a valid username and password. The username and password are stored into a new file. If a user wants to log into an already registered account, the function, LoggingIn() is called and will have to read from the respective file for the current user. The program needs to obtain the correct username to obtain the correct password, otherwise the program is not able to open the correct file which contains the password for the username. 
 
-![login terminal screen]([https://media3.giphy.com/media/aUovxH8Vf9qDu/giphy.gif](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHV6OThucHQyN283a2F3bTM2ZmFiYnNrZXhmdTdiOHA5bWFiMm9rcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zDwhjwSjC0SkdjNahs/giphy.gif))
+![login gif](https://github.com/user-attachments/assets/3d19e3cc-1828-4e7b-ad77-4a7f107ab1bf)
 
 ## WHAT TECHNOLOGY WAS USED
 
