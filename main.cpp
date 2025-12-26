@@ -1,61 +1,77 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "fns.h"
+#include <vector>
 
 using namespace std;
-
-bool LoggingIn() {
-	string username, password, user, pass;
-	cout << "Enter Username: ";
-	cin >> username;
-
-	cout << "Enter Password: ";
-	cin >> password;
-
-	ifstream read(username + ".txt");
-	getline(read, user);
-	getline(read, pass);
-
-	if (user == username && pass == password) {
-		return true;
-	}
-	else {
-		return false; 
-	}
-}
 
 int main()
 {
 	int choice;
+	std::vector<string> registeredUsers;
+	bool onLoginMenu = true;
+	bool userAlreadyExists = true;
+	int numUsers = 0;
 
-	cout << "Select a choice!\n1: Register\n2: Login\n Your choice: ";
-	cin >> choice;
-	if (choice == 1) {
-		string username, password;
-		cout << "Select a username: ";
-		cin >> username;
-		cout << "Select a password: ";
-		cin >> password;
+	while (onLoginMenu) {
 
-		ofstream file;
-		file.open(username + ".txt");
-		file << username << endl << password;
-		file.close();
+		displayMenu();
+		choice = getInput();
 
-		main();
-	}
-	else if (choice == 2) {
-		bool status = LoggingIn();
-		if (!status) {
-			cout << "Incorrect Information, Try Again!" << endl;
-			system("PAUSE");
-			return 0;
+		if (choice == 1) {
+			string username, password;
+			cout << "Select a username: ";
+			cin >> username;
+
+			while (userAlreadyExists) {
+				int counter = 0;
+				if (numUsers == 0) {
+					userAlreadyExists = false;
+					break;
+				}
+				for (string user : registeredUsers) {
+					counter++;
+					if (user == username) {
+						cout << "Username already taken. Please choose a different username." << endl;
+						cout << "Select a username: ";
+						cin >> username;
+
+					}
+					else if (counter == numUsers) {
+				
+						userAlreadyExists = false;
+					}
+				}
+			}
+
+			userAlreadyExists = true;
+
+			cout << "Select a password: ";
+			cin >> password;
+
+			registeredUsers.push_back(username);
+			numUsers++;
+
+			ofstream file;
+			file.open(username + ".txt");
+			file << username << endl << password;
+			file.close();
 		}
-		else {
-			cout << "Login Successful!" << endl;
-			system("PAUSE");
-			return 1;
+		else if (choice == 2) {
+			bool status = LoggingIn();
+			while (!status) {
+				cout << "Incorrect Information, Try Again!" << endl;
+				system("PAUSE");
+				status = LoggingIn();
+			}
+			if (status) {
+				cout << "Login Successful!" << endl;
+				system("PAUSE");
+				return 1;
 
+			}
 		}
 	}
 }
+
